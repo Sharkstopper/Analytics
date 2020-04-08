@@ -1,1 +1,1 @@
-# Common folder for project image
+# Common folder for project images
