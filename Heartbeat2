@@ -1,0 +1,42 @@
+Function Get-Heartbeat2 {
+    <#
+
+    .SYNOPSIS
+        Collects heartbeat data of computer 
+
+    .DESCRIPTION
+        Collects the following heartbeat data of computer using Get-ComputerInfo:
+         - Hotfix: ID, Description and Installation Date
+         - BIOS: Version, Release Date and Status
+         - OS: Name, Type, Version, Last Boot Up Time, Up Time
+         - Windows: Product Name, Version
+
+    .OUTPUTS
+        Get-Heartbeat2 | Out-File C:\Users\log.txt
+
+    .EXAMPLE
+        Get-Heartbeat2 
+
+    .NOTES
+       Version 1.0 of Get-Heartbeat2
+
+    #>
+
+    Param ($StartTime, $Metrics, $Hotfix, $Endtime)
+
+      #Gets Start Time
+      $StartTime = Get-Date
+
+      #Gets Computer Metrics (Windows, Bios and OS information)
+      $Metrics= Get-ComputerInfo | Format-Table -Property CSName, WindowsProductName, WindowsVersion, BiosReleaseDate, BiosStatus, OsName, OsType, OsVersion, OsLastBootUpTime, OsUptime
+    
+      #Gets Hotfix Data
+      $Hotfix = Get-HotFix | Format-Table -Property Description,HotFixId,InstalledOn
+    
+      #Gets End Time
+      $EndTime = Get-Date
+    
+      #Write Output to Log.txt with Elapsed Run Time
+      Write-Output ($Metrics, $Hotfix,"Elapsed Time: $(($EndTime-$StartTime).totalseconds) seconds")
+}
+
