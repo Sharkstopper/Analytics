@@ -1,0 +1,48 @@
+function Get-HeartBeat {
+    <#
+
+    .SYNOPSIS
+        Collects heartbeat data of computer
+
+    .DESCRIPTION
+        Collects the following heartbeat data of computer using Get-CimInstance:
+         - Hotfix: ID and Installation Date
+         - BIOS: Version, Release Date and Status
+         - OS: Name, Type, Version, Last Boot Up Time
+         - Windows: Version
+
+    .OUTPUTS
+        Get-Heartbeat | Out-File C:\Users\log.txt
+
+    .EXAMPLE
+        Get-Heartbeat 
+
+    .NOTES
+       Version 1.0 of Get-Heartbeat
+
+    #>
+
+    Param ($StartTime,$Hotfix,$BiosInfo,$OSInfo,$WindowsInfo,$EndTime)
+
+      #Get Start Time
+      $StartTime = (Get-Date)
+
+      #Get Hotfix Info
+      $Hotfix = Get-CimInstance -ClassName Win32_QuickFixEngineering | Format-Table -Property HotFixId, InstalledOn
+
+      #Get Bios Info (Version, Release Date and Status)
+      $BiosInfo = Get-CimInstance -ClassName Win32_BIOS | Format-Table -Property @{L='BiosVersion';E={$_.Version}}, @{L='BiosStatus';E={$_.Status}}, ReleaseDate
+    
+      #Get OS Info (Name, Type, Version, Last boot up time)
+      $OSInfo = Get-CimInstance -ClassName Win32_OperatingSystem | Format-Table -Property @{L='WindowsProductName';E={$_.caption}},OsType,@{L='OsVersion';E={$_.Version}},LastBootUpTime
+
+      #Get Windows Info (Version)
+      $WindowsInfo = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion"| Format-Table -Property @{L='WindowsVersion';E={$_.ReleaseId}}
+
+      #Get End Time
+      $EndTime = (Get-Date)
+
+      #Write Output to Log.txt with Elapsed Run Time
+      Write-Output ($Hotfix, $BiosInfo, $OSInfo, $WindowsInfo, "Elapsed Time: $(($EndTime-$StartTime).totalseconds) seconds")  
+}
+
