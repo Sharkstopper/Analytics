@@ -6,10 +6,10 @@ Function Get-Heartbeat2 {
 
     .DESCRIPTION
         Collects the following heartbeat data of computer using Get-ComputerInfo:
-         - Hotfix: ID and Installation Date
+         - Hotfix: ID, Description and Installation Date
          - BIOS: Version, Release Date and Status
-         - OS: Name, Type, Version, Last Boot Up Time
-         - Windows: Version
+         - OS: Name, Type, Version, Last Boot Up Time, Up Time
+         - Windows: Product Name, Version
 
     .OUTPUTS
         Get-Heartbeat2 | Out-File C:\Users\log.txt
