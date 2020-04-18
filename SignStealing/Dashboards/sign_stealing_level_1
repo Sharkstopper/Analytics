@@ -1,0 +1,757 @@
+<form>
+  <label>Sign Stealing Level 1</label>
+  <description>Test data can only be the 5k version because of truncation issues with the Cloud Splunk instance</description>
+  <fieldset submitButton="true" autoRun="false">
+    <input type="dropdown" token="dataset_lookup">
+      <label>Training Data Set</label>
+      <choice value="&quot;sign_stealing_raw_five.csv&quot;">5000</choice>
+      <default>"sign_stealing_raw_five.csv"</default>
+      <initialValue>"sign_stealing_raw_five.csv"</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>Raw Data</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Raw Data</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$
+| table STRING OUTCOME</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Raw Data - Steal Filter</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$ WHERE OUTCOME = "STEAL"
+| table STRING OUTCOME</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Raw Data - Negative Filter</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$ WHERE OUTCOME = "NO"
+| table STRING OUTCOME</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Raw Data</title>
+      <single>
+        <search>
+          <query>| inputlookup $dataset_lookup$
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Raw Data - Steal Filter</title>
+      <single>
+        <search>
+          <query>| inputlookup $dataset_lookup$ WHERE OUTCOME = "STEAL"
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Raw Data - Negative Filter</title>
+      <single>
+        <search>
+          <query>| inputlookup $dataset_lookup$ WHERE OUTCOME = "NO"
+| stats count</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
+        <option name="rangeValues">[0,30,70,100]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">0</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html/>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>Consecutive Sign Theory - The steal sign is indicated by 2, 3, 4, or 5 consecutive signs being indicated to the runner.</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Consecutive Matches - Two Digits</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$
+
+| eval array1 = substr(STRING,1,2)
+| eval array2 = substr(STRING,2,2)
+| eval array3 = substr(STRING,3,2)
+| eval array4 = substr(STRING,4,2)
+| eval array5 = substr(STRING,5,2)
+| eval array6 = substr(STRING,6,2)
+| eval array7 = substr(STRING,7,2)
+| eval array8 = substr(STRING,8,2)
+| eval array9 = substr(STRING,9,2)
+| eval array10 = substr(STRING,10,2)
+| eval array11 = substr(STRING,11,2)
+| eval array12 = substr(STRING,12,2)
+| eval array13 = substr(STRING,13,2)
+| eval array14 = substr(STRING,14,2)
+| eval array15 = substr(STRING,15,2)
+| eval array16 = substr(STRING,16,2)
+| eval array17 = substr(STRING,17,2)
+| eval array18 = substr(STRING,18,2)
+| eval array19 = substr(STRING,19,2)
+
+| eval arrayed = array1.";"
+| eval arrayed = if(len(array2)=2,arrayed.array2.";",arrayed)
+| eval arrayed = if(len(array3)=2,arrayed.array3.";",arrayed)
+| eval arrayed = if(len(array4)=2,arrayed.array4.";",arrayed)
+| eval arrayed = if(len(array5)=2,arrayed.array5.";",arrayed)
+| eval arrayed = if(len(array6)=2,arrayed.array6.";",arrayed)
+| eval arrayed = if(len(array7)=2,arrayed.array7.";",arrayed)
+| eval arrayed = if(len(array8)=2,arrayed.array8.";",arrayed)
+| eval arrayed = if(len(array9)=2,arrayed.array9.";",arrayed)
+| eval arrayed = if(len(array10)=2,arrayed.array10.";",arrayed)
+| eval arrayed = if(len(array11)=2,arrayed.array11.";",arrayed)
+| eval arrayed = if(len(array12)=2,arrayed.array12.";",arrayed)
+| eval arrayed = if(len(array13)=2,arrayed.array13.";",arrayed)
+| eval arrayed = if(len(array14)=2,arrayed.array14.";",arrayed)
+| eval arrayed = if(len(array15)=2,arrayed.array15.";",arrayed)
+| eval arrayed = if(len(array16)=2,arrayed.array16.";",arrayed)
+| eval arrayed = if(len(array17)=2,arrayed.array17.";",arrayed)
+| eval arrayed = if(len(array18)=2,arrayed.array18.";",arrayed)
+| eval arrayed = if(len(array19)=2,arrayed.array19.";",arrayed)
+| eval arrayed = substr(arrayed,1,len(arrayed) - 1)
+| eval full_array = split(arrayed,";")
+| mvexpand full_array
+| stats count(eval(match(OUTCOME,"STEAL"))) as STEAL_MATCH, count(eval(match(OUTCOME,"NO"))) as NEGATIVE by full_array
+| sort 0 -STEAL_MATCH
+| rename full_array as split_sequence
+| eval accuracy = (STEAL_MATCH * 100) / (STEAL_MATCH + NEGATIVE)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="STEAL_MATCH">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="NEGATIVE">
+          <colorPalette type="minMidMax" maxColor="#DC4E41" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax" minValue="0"></scale>
+        </format>
+        <format type="number" field="accuracy">
+          <option name="precision">1</option>
+          <option name="unit">%</option>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <title>Consecutive Matches - 3 Digits</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$
+
+| eval array1 = substr(STRING,1,3)
+| eval array2 = substr(STRING,2,3)
+| eval array3 = substr(STRING,3,3)
+| eval array4 = substr(STRING,4,3)
+| eval array5 = substr(STRING,5,3)
+| eval array6 = substr(STRING,6,3)
+| eval array7 = substr(STRING,7,3)
+| eval array8 = substr(STRING,8,3)
+| eval array9 = substr(STRING,9,3)
+| eval array10 = substr(STRING,10,3)
+| eval array11 = substr(STRING,11,3)
+| eval array12 = substr(STRING,12,3)
+| eval array13 = substr(STRING,13,3)
+| eval array14 = substr(STRING,14,3)
+| eval array15 = substr(STRING,15,3)
+| eval array16 = substr(STRING,16,3)
+| eval array17 = substr(STRING,17,3)
+| eval array18 = substr(STRING,18,3)
+
+| eval arrayed = array1.";"
+| eval arrayed = if(len(array2)=3,arrayed.array2.";",arrayed)
+| eval arrayed = if(len(array3)=3,arrayed.array3.";",arrayed)
+| eval arrayed = if(len(array4)=3,arrayed.array4.";",arrayed)
+| eval arrayed = if(len(array5)=3,arrayed.array5.";",arrayed)
+| eval arrayed = if(len(array6)=3,arrayed.array6.";",arrayed)
+| eval arrayed = if(len(array7)=3,arrayed.array7.";",arrayed)
+| eval arrayed = if(len(array8)=3,arrayed.array8.";",arrayed)
+| eval arrayed = if(len(array9)=3,arrayed.array9.";",arrayed)
+| eval arrayed = if(len(array10)=3,arrayed.array10.";",arrayed)
+| eval arrayed = if(len(array11)=3,arrayed.array11.";",arrayed)
+| eval arrayed = if(len(array12)=3,arrayed.array12.";",arrayed)
+| eval arrayed = if(len(array13)=3,arrayed.array13.";",arrayed)
+| eval arrayed = if(len(array14)=3,arrayed.array14.";",arrayed)
+| eval arrayed = if(len(array15)=3,arrayed.array15.";",arrayed)
+| eval arrayed = if(len(array16)=3,arrayed.array16.";",arrayed)
+| eval arrayed = if(len(array17)=3,arrayed.array17.";",arrayed)
+| eval arrayed = if(len(array18)=3,arrayed.array18.";",arrayed)
+| eval arrayed = substr(arrayed,1,len(arrayed) - 1)
+| eval full_array = split(arrayed,";")
+| mvexpand full_array
+| stats count(eval(match(OUTCOME,"STEAL"))) as STEAL_MATCH, count(eval(match(OUTCOME,"NO"))) as NEGATIVE by full_array
+| sort 0 -STEAL_MATCH
+| rename full_array as split_sequence
+| eval accuracy = (STEAL_MATCH * 100) / (STEAL_MATCH + NEGATIVE)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="STEAL_MATCH">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="NEGATIVE">
+          <colorPalette type="minMidMax" maxColor="#DC4E41" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="number" field="accuracy">
+          <option name="precision">1</option>
+          <option name="unit">%</option>
+        </format>
+      </table>
+    </panel>
+    <panel>
+      <title>Consecutive Matches - 4 Digits</title>
+      <table>
+        <search>
+          <query>| inputlookup $dataset_lookup$
+
+| eval array1 = substr(STRING,1,4)
+| eval array2 = substr(STRING,2,4)
+| eval array3 = substr(STRING,3,4)
+| eval array4 = substr(STRING,4,4)
+| eval array5 = substr(STRING,5,4)
+| eval array6 = substr(STRING,6,4)
+| eval array7 = substr(STRING,7,4)
+| eval array8 = substr(STRING,8,4)
+| eval array9 = substr(STRING,9,4)
+| eval array10 = substr(STRING,10,4)
+| eval array11 = substr(STRING,11,4)
+| eval array12 = substr(STRING,12,4)
+| eval array13 = substr(STRING,13,4)
+| eval array14 = substr(STRING,14,4)
+| eval array15 = substr(STRING,15,4)
+| eval array16 = substr(STRING,16,4)
+| eval array17 = substr(STRING,17,4)
+
+| eval arrayed = array1.";"
+| eval arrayed = if(len(array2)=4,arrayed.array2.";",arrayed)
+| eval arrayed = if(len(array3)=4,arrayed.array3.";",arrayed)
+| eval arrayed = if(len(array4)=4,arrayed.array4.";",arrayed)
+| eval arrayed = if(len(array5)=4,arrayed.array5.";",arrayed)
+| eval arrayed = if(len(array6)=4,arrayed.array6.";",arrayed)
+| eval arrayed = if(len(array7)=4,arrayed.array7.";",arrayed)
+| eval arrayed = if(len(array8)=4,arrayed.array8.";",arrayed)
+| eval arrayed = if(len(array9)=4,arrayed.array9.";",arrayed)
+| eval arrayed = if(len(array10)=4,arrayed.array10.";",arrayed)
+| eval arrayed = if(len(array11)=4,arrayed.array11.";",arrayed)
+| eval arrayed = if(len(array12)=4,arrayed.array12.";",arrayed)
+| eval arrayed = if(len(array13)=4,arrayed.array13.";",arrayed)
+| eval arrayed = if(len(array14)=4,arrayed.array14.";",arrayed)
+| eval arrayed = if(len(array15)=4,arrayed.array15.";",arrayed)
+| eval arrayed = if(len(array16)=4,arrayed.array16.";",arrayed)
+| eval arrayed = if(len(array17)=4,arrayed.array17.";",arrayed)
+| eval arrayed = substr(arrayed,1,len(arrayed) - 1)
+| eval full_array = split(arrayed,";")
+| mvexpand full_array
+| stats count(eval(match(OUTCOME,"STEAL"))) as STEAL_MATCH, count(eval(match(OUTCOME,"NO"))) as NEGATIVE by full_array
+| sort 0 -STEAL_MATCH
+| rename full_array as split_sequence
+| eval accuracy = (STEAL_MATCH * 100) / (STEAL_MATCH + NEGATIVE)</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="STEAL_MATCH">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="NEGATIVE">
+          <colorPalette type="minMidMax" maxColor="#DC4E41" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax" minValue="0"></scale>
+        </format>
+        <format type="number" field="accuracy">
+          <option name="precision">1</option>
+          <option name="unit">%</option>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Enter Your String - Test whether it matches up against a different/larger data set</title>
+      <input type="text" token="match_test" searchWhenChanged="true">
+        <label>Test Your Match</label>
+      </input>
+      <html>
+        <b>
+          <center>
+            <h1/>
+          </center>
+        </b>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>50k Dataset Summary</title>
+      <table>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval tester = "OUTCOME COUNT"
+| stats count(eval(match(OUTCOME,"NO"))) as NO, count(eval(match(OUTCOME,"STEAL"))) as STEAL by tester
+| rename tester as " "</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html/>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>OUTCOME = STEAL</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>OUTCOME = NO</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <html/>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>OUTCOME = STEAL</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>OUTCOME = NO</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>PREDICTION = STEAL</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <title>Successful prediction</title>
+      <html>
+        <h2>
+          <b>
+            <p style="color:green">True positive</p>
+          </b>
+          <p style="color:green">A test result where a prediction of a positive result was correct.  In our scenario, while a prediction is correct with a result of "prediction positive/outcome positive" or "prediction negative/outcome negative", a true positive is more meaningful due to the fact that outcome positives happen much less often than outcome negatives.</p>
+        </h2>
+      </html>
+    </panel>
+    <panel>
+      <title>Failed prediction</title>
+      <html>
+        <h2>
+          <b>
+            <p style="color:red">False positive - Type I Error</p>
+          </b>
+          <p style="color:red">A test result where a prediction of a positive result was incorrect.  In this scenario, a steal is predicted (positive prediction), but the outcome of the event is produces no steal (negative result).  In an ideal world, Type I and Type II errors are minimized.</p>
+        </h2>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>PREDICTION = STEAL</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <title>Successful Prediction</title>
+      <single>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval string_match = if(like(STRING, "%$match_test$%"), "MATCH", "NEGATIVE")
+| eval SUCCESSFUL_PREDICTION = if(string_match = "MATCH" AND OUTCOME = "STEAL", 1, 0)
+| eval PREDICTED_BUT_NO_STEAL = if(string_match = "MATCH" AND OUTCOME = "NO", 1, 0)
+| eval DID_NOT_PREDICT_A_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "STEAL", 1, 0)
+| eval NO_PREDICTION_NO_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "NO", 1, 0)
+| stats sum(SUCCESSFUL_PREDICTION) as SUCCESSFUL_PREDICTION, sum(PREDICTED_BUT_NO_STEAL) as PREDICTED_BUT_NO_STEAL, sum(DID_NOT_PREDICT_A_STEAL) as DID_NOT_PREDICT_A_STEAL, sum(NO_PREDICTION_NO_STEAL) as NO_PREDICTION_NO_STEAL
+| table SUCCESSFUL_PREDICTION</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x555","0x53a051"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Prediction = Steal, Outcome = Steal</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <title>Failed Prediction</title>
+      <single>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval string_match = if(like(STRING, "%$match_test$%"), "MATCH", "NEGATIVE")
+| eval SUCCESSFUL_PREDICTION = if(string_match = "MATCH" AND OUTCOME = "STEAL", 1, 0)
+| eval PREDICTED_BUT_NO_STEAL = if(string_match = "MATCH" AND OUTCOME = "NO", 1, 0)
+| eval DID_NOT_PREDICT_A_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "STEAL", 1, 0)
+| eval NO_PREDICTION_NO_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "NO", 1, 0)
+| stats sum(SUCCESSFUL_PREDICTION) as SUCCESSFUL_PREDICTION, sum(PREDICTED_BUT_NO_STEAL) as PREDICTED_BUT_NO_STEAL, sum(DID_NOT_PREDICT_A_STEAL) as DID_NOT_PREDICT_A_STEAL, sum(NO_PREDICTION_NO_STEAL) as NO_PREDICTION_NO_STEAL
+| table PREDICTED_BUT_NO_STEAL</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0xdc4e41"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Prediction = Steal, Outcome = No</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>PREDICTION = NO</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <title>Missed Steal</title>
+      <html>
+        <h2>
+          <b>
+            <p style="color:red">False negative - Type II Error</p>
+          </b>
+          <p style="color:red">A test result where a prediction of a negative result was incorrect.  In this scenario, a steal is not predicted (negative prediction), but the outcome of the event is a steal (positive result).  In an ideal world, Type I and Type II errors are minimized.</p>
+        </h2>
+      </html>
+    </panel>
+    <panel>
+      <title>No prediction or action made</title>
+      <html>
+        <h2>
+          <b>
+            <p>True negative</p>
+          </b>
+          <p>A test result where a prediction of a negative result (or a lack of a prediction of a positive result) was correct.  In our scenario, while a prediction is correct with a result of "prediction positive/outcome positive" or "prediction negative/outcome negative", a true negative is less meaningful due to the fact that outcome negatives happen much more often than outcome positives.</p>
+        </h2>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <b>
+          <center>
+            <h1>PREDICTION = NO</h1>
+          </center>
+        </b>
+      </html>
+    </panel>
+    <panel>
+      <title>Missed Steal</title>
+      <single>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval string_match = if(like(STRING, "%$match_test$%"), "MATCH", "NEGATIVE")
+| eval SUCCESSFUL_PREDICTION = if(string_match = "MATCH" AND OUTCOME = "STEAL", 1, 0)
+| eval PREDICTED_BUT_NO_STEAL = if(string_match = "MATCH" AND OUTCOME = "NO", 1, 0)
+| eval DID_NOT_PREDICT_A_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "STEAL", 1, 0)
+| eval NO_PREDICTION_NO_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "NO", 1, 0)
+| stats sum(SUCCESSFUL_PREDICTION) as SUCCESSFUL_PREDICTION, sum(PREDICTED_BUT_NO_STEAL) as PREDICTED_BUT_NO_STEAL, sum(DID_NOT_PREDICT_A_STEAL) as DID_NOT_PREDICT_A_STEAL, sum(NO_PREDICTION_NO_STEAL) as NO_PREDICTION_NO_STEAL
+| table DID_NOT_PREDICT_A_STEAL</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0xdc4e41"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Prediction = No, Outcome = Steal</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+    <panel>
+      <title>No prediction or action made</title>
+      <single>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval string_match = if(like(STRING, "%$match_test$%"), "MATCH", "NEGATIVE")
+| eval SUCCESSFUL_PREDICTION = if(string_match = "MATCH" AND OUTCOME = "STEAL", 1, 0)
+| eval PREDICTED_BUT_NO_STEAL = if(string_match = "MATCH" AND OUTCOME = "NO", 1, 0)
+| eval DID_NOT_PREDICT_A_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "STEAL", 1, 0)
+| eval NO_PREDICTION_NO_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "NO", 1, 0)
+| stats sum(SUCCESSFUL_PREDICTION) as SUCCESSFUL_PREDICTION, sum(PREDICTED_BUT_NO_STEAL) as PREDICTED_BUT_NO_STEAL, sum(DID_NOT_PREDICT_A_STEAL) as DID_NOT_PREDICT_A_STEAL, sum(NO_PREDICTION_NO_STEAL) as NO_PREDICTION_NO_STEAL
+| table NO_PREDICTION_NO_STEAL</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x555"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="underLabel">Prediction = No, Outcome = No</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Test Your String Against 50k Data</title>
+      <table>
+        <search>
+          <query>| inputlookup sign_stealing_raw_fifty.csv
+| eval string_match = if(like(STRING, "%$match_test$%"), "MATCH", "NEGATIVE")
+| eval SUCCESSFUL_PREDICTION = if(string_match = "MATCH" AND OUTCOME = "STEAL", 1, 0)
+| eval PREDICTED_BUT_NO_STEAL = if(string_match = "MATCH" AND OUTCOME = "NO", 1, 0)
+| eval DID_NOT_PREDICT_A_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "STEAL", 1, 0)
+| eval NO_PREDICTION_NO_STEAL = if(string_match = "NEGATIVE" AND OUTCOME = "NO", 1, 0)
+| stats sum(SUCCESSFUL_PREDICTION) as SUCCESSFUL_PREDICTION, sum(PREDICTED_BUT_NO_STEAL) as PREDICTED_BUT_NO_STEAL, sum(DID_NOT_PREDICT_A_STEAL) as DID_NOT_PREDICT_A_STEAL, sum(NO_PREDICTION_NO_STEAL) as NO_PREDICTION_NO_STEAL</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">true</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>
