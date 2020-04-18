@@ -1,0 +1,96 @@
+<form>
+  <label>Dashboard Usage</label>
+  <fieldset submitButton="false">
+    <input type="time" token="token_time" searchWhenChanged="true">
+      <label>Time</label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Dashboard and Query Usage</title>
+      <chart>
+        <search>
+          <query>index=_audit user=testsharky* search="*sign_stealing*"
+| eval query_type = case(like(search_id,"%testsharky%"), "DASHBOARD_SEARCH", 1==1, "AD_HOC_QUERY")
+| search query_type = "AD_HOC_QUERY"
+| table _time query_type
+| append [| search index="_internal" user!="-"  sourcetype=splunkd_ui_access "en-US/app"
+| rex field=uri "en-US/app/(?&lt;app&gt;[^/]+)/(?&lt;dashboard&gt;[^?/\s]+)"
+| search dashboard!=search dashboard!=home dashboard!=datasets dashboard!=dashboards dashboard!=dataset dashboard!=monitoringconsole_overview dashboard!=reports
+| rename dashboard as query_type
+| table _time query_type]
+| timechart span=15m count by query_type</query>
+          <earliest>$token_time.earliest$</earliest>
+          <latest>$token_time.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Dashboard and Query Usage History Raw Data</title>
+      <table>
+        <search>
+          <query>index=_audit user=testsharky* search="*sign_stealing*"
+| eval query_type = case(like(search_id,"%testsharky%"), "DASHBOARD_SEARCH", 1==1, "AD_HOC_QUERY")
+| search query_type = "AD_HOC_QUERY"
+| table _time query_type search
+| append [| search index="_internal" user!="-"  sourcetype=splunkd_ui_access "en-US/app"
+| rex field=uri "en-US/app/(?&lt;app&gt;[^/]+)/(?&lt;dashboard&gt;[^?/\s]+)"
+| search dashboard!=search dashboard!=home dashboard!=datasets dashboard!=dashboards dashboard!=dataset dashboard!=monitoringconsole_overview dashboard!=reports
+| rename dashboard as query_type
+| table _time query_type]
+| sort 0 _time</query>
+          <earliest>$token_time.earliest$</earliest>
+          <latest>$token_time.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</form>
