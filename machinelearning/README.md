@@ -173,6 +173,9 @@ The above query produces the following transformed table:
 
 Before we proceed with model selection.  A few words regarding Splunk, Machine Learning and Deep Learning. Splunk gives the following precautions: “The Machine Learning Toolkit is not a default solution, but a way to create custom machine learning. You must have domain knowledge, Splunk Search Processing Language (SPL) knowledge, Splunk platform experience, and data science skills or experience to use the MLTK.” <sup>7</sup> 
 
+Splunk generalizes the model selection process by presenting its default MLTK screen with general tasks that a Data Scientist want to accomplish such as Predict Fields, Detect Outliers, Forecast Time Series and Cluster Events. Since we want to predict the “Outcome” field based on the transformed fields of S001 through S020,  “Predict Fields” is the best choice.  
+
+Navigate to the Machine Learning Toolkit App which at the time of this writing defaults the showcase dashboard as seen below.
 
 ![Machine Learning Capture](/source/images/DJMLTKScreenCapture1.png)
 #### Training
