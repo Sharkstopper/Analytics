@@ -180,7 +180,7 @@ Let us walk through the data cleaning SPL for this task.
 
 #### Prediction
    Deep Learning Dashboard here 
-![Machine Learning Capture1](/source/images/DJMLTKScreenCapture.PNG)  
+![Machine Learning Capture1](/source/images/DJMLTKScreenCapture.png)  
 ######  Footnotes
    
  <sup>1</sup> https://en.wikipedia.org/wiki/Artificial_intelligence
