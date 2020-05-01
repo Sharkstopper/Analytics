@@ -115,7 +115,11 @@ Splunk MLTK Assistants Example :
 As a way of reinforcing the Artificial Intelligence subjects discussed above, this section will use Yufeng’s seven steps of Machine Learning<sup>4</sup> through the application of Splunk’s machine learning and deep learning toolkits to determine if a series of encoded baseball base stealing signals can be interpreted as “Steal” or “No Steal”. 
 
 #### Gathering data
-The dataset consists of two comma-separated values (CSV) files containing 5K and 50K rows of data respectively. Each row contains two fields. `[Field 1; ‘STRING’: a sequence of 6 to 20 base stealing signals encoded (‘A’ through ‘G’ )] and [Field 2; ‘OUTCOME’ : a  state encoded “STEAL” or “NO”].`
+The dataset consists of two comma-separated values (CSV) files containing 5K and 50K rows of data respectively. Each row contains two fields. 
+| Field 1; ‘STRING’: a sequence of 6 to 20 base stealing signals encoded (‘A’ through ‘G’ )    |Field 2: ‘OUTCOME’ : a  state encoded “STEAL” or “NO”    | 
+| :------------- | :---------- | 
+|  ABCAEFC | STEAL   | 
+|  AAAAAA | NO   | 
 
 See the snapshot of the 5K file below:
 ![Excel image of CSV file](/source/images/DataSetExample.png)
