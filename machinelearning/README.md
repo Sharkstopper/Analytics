@@ -175,7 +175,7 @@ Let us walk through the data cleaning SPL for this task.
 #### Hyperparameter tuning
     
 * Small Example here 
-![Hyperparameter Splunk Image](../source/images/HyperparameterCapture.png)
+![Hyperparameter Splunk Image](.../source/images/HyperparameterCapture.png)
 
 
 #### Prediction
