@@ -164,7 +164,7 @@ Let us walk through the data cleaning SPL for this task.
 #### Choosing a model
 * insert Splunk Learning TK Dashboard --- Here  
 
-![Machine Learning Capture1](/source/images/DJMLTKScreenCapture.png)
+![Machine Learning Capture1](/source/images/DJMLTKScreenCapture1.png)
 #### Training
     
 * Show an example of model training -- here 
@@ -180,7 +180,7 @@ Let us walk through the data cleaning SPL for this task.
 
 #### Prediction
    Deep Learning Dashboard here 
-![Machine Learning Capture1](/source/images/DJMLTKScreenCapture.png)  
+![Machine Learning Capture1](/source/images/BaseBallNNCapture1.png)  
 ######  Footnotes
    
  <sup>1</sup> https://en.wikipedia.org/wiki/Artificial_intelligence
