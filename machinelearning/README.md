@@ -79,7 +79,7 @@ Below are two examples in Splunk SPL of two machine learning models:
 Data sample:
 
 
-![Head churn Data](splunkChurnHead.png)
+![Head churn Data](https://github.com/Sharkstopper/Analytics/tree/master/source/images/splunkChurnHead.png)
 
 
 * Example 2: Density Function - Anomaly Detection
@@ -164,7 +164,7 @@ Let us walk through the data cleaning SPL for this task.
 #### Choosing a model
 * insert Splunk Learning TK Dashboard --- Here  
 
-![Machine Learning Capture1](DJMLTKScreenCapture.png)
+![Machine Learning Capture1](https://github.com/Sharkstopper/Analytics/tree/master/source/images/DJMLTKScreenCapture.png)
 #### Training
     
 * Show an example of model training -- here 
@@ -175,7 +175,7 @@ Let us walk through the data cleaning SPL for this task.
 #### Hyperparameter tuning
     
 * Small Example here 
-![Hyperparameter Splunk Image](HyperparameterCapture.png)
+![Hyperparameter Splunk Image](https://github.com/Sharkstopper/Analytics/tree/master/source/images/HyperparameterCapture.png)
 
 
 #### Prediction
