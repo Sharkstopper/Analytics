@@ -116,11 +116,12 @@ As a way of reinforcing the Artificial Intelligence subjects discussed above, th
 
 #### Gathering data
 The dataset consists of two comma-separated values (CSV) files containing 5K and 50K rows of data respectively. Each row contains two fields. 
+<font size="1">  
 | Field 1; ‘STRING’: a sequence of 6 to 20 base stealing signals encoded (‘A’ through ‘G’ )    |Field 2: ‘OUTCOME’ : a  state encoded “STEAL” or “NO”    | 
 | :------------- | :---------- | 
 |  ABCAEFC | STEAL   | 
 |  AAAAAA | NO   | 
-
+</font>  
 See the snapshot of the 5K file below:
 ![Excel image of CSV file](/source/images/DataSetExample.png)
 
