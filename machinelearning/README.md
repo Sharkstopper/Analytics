@@ -118,7 +118,7 @@ As a way of reinforcing the Artificial Intelligence subjects discussed above, th
 The dataset consists of two comma-separated values (CSV) files containing 5K and 50K rows of data respectively. Each row contains two fields. `[Field 1; ‘STRING’: a sequence of 6 to 20 base stealing signals encoded (‘A’ through ‘G’ )] and [Field 2; ‘OUTCOME’ : a  state encoded “STEAL” or “NO”].`
 
 See the snapshot of the 5K file below:
-![image sign_stealing_raw_five.csv](/source/images/DataSetExample.png)
+![Excel image of CSV file](/source/images/DataSetExample.png)
 
 #### Preparing that data
 The data in the csv files are raw and must be transformed into structure where ML algorithms can operate on them.  For data scientists, data transformation is the most tedious part of the job.  The Analytics India Magazine states that “Data Scientists spend 60% of their time on cleaning and organizing data.”<sup>5</sup>
@@ -161,10 +161,13 @@ Let us walk through the data cleaning SPL for this task.
 ```
 </font>
 
+The above query produces the following transformed table:
+
+![Splunk Output of transformed data](/source/images/TransformedData.png)
 #### Choosing a model
 * insert Splunk Learning TK Dashboard --- Here  
 
-![Machine Learning Capture1](/source/images/DJMLTKScreenCapture1.png)
+![Machine Learning Capture](/source/images/DJMLTKScreenCapture1.png)
 #### Training
     
 * Show an example of model training -- here 
