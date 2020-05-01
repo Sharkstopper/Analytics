@@ -165,7 +165,9 @@ The above query produces the following transformed table:
 
 ![Splunk Output of transformed data](/source/images/TransformedData.png)
 #### Choosing a model
-* insert Splunk Learning TK Dashboard --- Here  
+
+Before we proceed with model selection.  A few words regarding Splunk, Machine Learning and Deep Learning. Splunk gives the following precautions: “The Machine Learning Toolkit is not a default solution, but a way to create custom machine learning. You must have domain knowledge, Splunk Search Processing Language (SPL) knowledge, Splunk platform experience, and data science skills or experience to use the MLTK.” <sup>7</sup> 
+
 
 ![Machine Learning Capture](/source/images/DJMLTKScreenCapture1.png)
 #### Training
@@ -197,3 +199,5 @@ The above query produces the following transformed table:
  <sup>5</sup> https://analyticsindiamag.com/6-tasks-data-scientists-spend-the-most-time-doing/
  
  <sup>6</sup> https://en.wikipedia.org/wiki/Data_wrangling
+ 
+<sup>7</sup>  https://docs.splunk.com/Documentation/MLApp/5.1.0/User/AboutMLTK
