@@ -79,7 +79,7 @@ Below are two examples in Splunk SPL of two machine learning models:
 Data sample:
 
 
-![Head churn Data](../Analytics/tree/master/source/images/splunkChurnHead.png)
+![Head churn Data](/source/images/splunkChurnHead.png)
 
 
 * Example 2: Density Function - Anomaly Detection
