@@ -177,6 +177,13 @@ Before we proceed with model selection in Splunk, let's look at a tool from the 
 
 [See the scikit learn algorithm cheat-sheet.](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
+From the scikit learn cheat sheet we will use the 50K dataset for this example.   **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **yes** `the data is labeled` **NO** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the  flow chart suggests an `SGD classifier`. 
+
+"A Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable)."<sup>8</sup> 
+
+
+Now we are ready to look at what model Splunk privides in its MLTK.
+
 Splunk generalizes the model selection process by presenting its default MLTK screen with general tasks that a Data Scientist want to accomplish such as Predict Fields, Detect Outliers, Forecast Time Series and Cluster Events. Since we want to predict the “Outcome” field based on the transformed fields of S001 through S020,  “Predict Fields” is the best choice.  
 
 Navigate to the Machine Learning Toolkit App which at the time of this writing defaults the showcase dashboard as seen below.
@@ -213,3 +220,5 @@ Navigate to the Machine Learning Toolkit App which at the time of this writing d
  <sup>6</sup> https://en.wikipedia.org/wiki/Data_wrangling
  
  <sup>7</sup>  https://docs.splunk.com/Documentation/MLApp/5.1.0/User/AboutMLTK
+ 
+ <sup>8</sup>  https://en.wikipedia.org/wiki/Stochastic_gradient_descent
