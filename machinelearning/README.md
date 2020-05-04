@@ -175,7 +175,7 @@ Model selection is the most important step in the machine learning process and e
 
 Before we proceed with model selection in Splunk, let's look at a tool from the SciPy ecosystem scikit-learn which is the most prevalent machine learning for Python.  Scikit learn provides python packages that puts a wrapper around most major machine learning algorithms.  The Scikit flowchart below is a good start to determining which models will use it to select a model for our project. 
 
-[scikit learn flowchart](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+[See the scikit learn algorithm cheat-sheet.](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
 Splunk generalizes the model selection process by presenting its default MLTK screen with general tasks that a Data Scientist want to accomplish such as Predict Fields, Detect Outliers, Forecast Time Series and Cluster Events. Since we want to predict the “Outcome” field based on the transformed fields of S001 through S020,  “Predict Fields” is the best choice.  
 
@@ -212,4 +212,4 @@ Navigate to the Machine Learning Toolkit App which at the time of this writing d
  
  <sup>6</sup> https://en.wikipedia.org/wiki/Data_wrangling
  
-<sup>7</sup>  https://docs.splunk.com/Documentation/MLApp/5.1.0/User/AboutMLTK
+ <sup>7</sup>  https://docs.splunk.com/Documentation/MLApp/5.1.0/User/AboutMLTK
