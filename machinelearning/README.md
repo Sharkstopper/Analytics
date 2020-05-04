@@ -185,7 +185,7 @@ The image below shows how the SGD model separates out data points into two outpu
 
 [SGD - Stochastic Gradient Descent](https://bogotobogo.com/python/scikit-learn/images/Batch-vs-Stochastic-Gradient-Descent/SGD-Classifier.png)
 
-Now we are ready to look at what model Splunk privides in its MLTK.
+Now we are ready to look at what model Splunk provides in its MLTK app.
 
 Splunk generalizes the model selection process by presenting its default MLTK screen with general tasks that a Data Scientist want to accomplish such as Predict Fields, Detect Outliers, Forecast Time Series and Cluster Events. Since we want to predict the “Outcome” field based on the transformed fields of S001 through S020,  “Predict Fields” is the best choice.  
 
