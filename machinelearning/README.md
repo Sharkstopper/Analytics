@@ -173,14 +173,17 @@ The above query produces the following transformed table:
 
 Model selection is the most important step in the machine learning process and extreme diligence must be applied to ensure that the correct model is chosen.  A few words from Splunk Inc regarding Machine Learning and Deep Learning. Splunk gives the following precautions: “The Machine Learning Toolkit is not a default solution, but a way to create custom machine learning. You must have domain knowledge, Splunk Search Processing Language (SPL) knowledge, Splunk platform experience, and data science skills or experience to use the MLTK.” <sup>7</sup> 
 
-Before we proceed with model selection in Splunk, let's look at a tool from the SciPy ecosystem scikit-learn which is the most prevalent machine learning for Python.  Scikit learn provides python packages that puts a wrapper around most major machine learning algorithms.  The Scikit flowchart below is a good start to determining which models will use it to select a model for our project. 
+Before we proceed with model selection in Splunk, let us look at a tool from the SciPy ecosystem scikit-learn which is the most prevalent machine learning for Python.  Scikit learn provides python packages that puts a wrapper around most major machine learning algorithms.  The Scikit flowchart cheat sheet below is a good place to start for trimming down on which models to select for any machine learning  project. 
 
 [See the scikit learn algorithm cheat-sheet.](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
-From the scikit learn cheat sheet we will use the 50K dataset for this example.   **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **yes** `the data is labeled` **NO** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the  flow chart suggests an `SGD classifier`. 
+From the scikit learn cheat sheet we will use the 50K dataset for this example.   **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **yes** `the data is labeled` **NO** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the flow chart suggests a `SGD classifier`. 
 
-"A Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable)."<sup>8</sup> 
+"A Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable)."<sup>8</sup>
 
+The image below shows how the SGD model separates out data points into two output classes based on two factors (sepal length and petal length) for the famous iris data set.
+
+[SGD - Stochastic Gradient Descent](https://bogotobogo.com/python/scikit-learn/images/Batch-vs-Stochastic-Gradient-Descent/SGD-Classifier.png)
 
 Now we are ready to look at what model Splunk privides in its MLTK.
 
