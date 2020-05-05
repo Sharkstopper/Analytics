@@ -123,7 +123,7 @@ The dataset consists of two comma-separated values (CSV) files containing 5K and
 |  AAAAAA | NO   | 
 </font>  
 See the snapshot of the 5K file below:
-![Excel image of CSV file](/source/images/DataSetExample.png)
+![image of csv file](/source/images/DataSetExample.png)
 
 #### Preparing that data
 The data in the csv files are raw and must be transformed into structure where ML algorithms can operate on them.  For data scientists, data transformation is the most tedious part of the job.  The Analytics India Magazine states that “Data Scientists spend 60% of their time on cleaning and organizing data.”<sup>5</sup>
