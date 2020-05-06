@@ -177,7 +177,9 @@ Before we proceed with model selection in Splunk, let us look at a tool from the
 
 [See the scikit learn algorithm cheat-sheet.](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
-From the scikit learn cheat sheet we will use the 50K dataset for this example.   **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **yes** `the data is labeled` **NO** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the flow chart suggests a `SGD classifier`. 
+From the scikit learn cheat sheet we will use the 50K dataset for this example. 
+
+We traverse the flowchart:  **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **No** `predicting a quantity` **YES** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the flow chart suggests a `SGD Regresser`. 
 
 "A Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable)."<sup>8</sup>
 
@@ -185,16 +187,21 @@ The image below shows how the SGD model separates out data points into two outpu
 
 [SGD - Stochastic Gradient Descent](https://bogotobogo.com/python/scikit-learn/images/Batch-vs-Stochastic-Gradient-Descent/SGD-Classifier.png)
 
-Now we are ready to look at what model Splunk provides in its MLTK app.
-
-Splunk generalizes the model selection process by presenting its default MLTK screen with general tasks that a Data Scientist want to accomplish such as Predict Fields, Detect Outliers, Forecast Time Series and Cluster Events. Since we want to predict the “Outcome” field based on the transformed fields of S001 through S020,  “Predict Fields” is the best choice.  
+Now we are ready to look at what equivalent models Splunk provides in its MLTK app.
 
 Navigate to the Machine Learning Toolkit App which at the time of this writing defaults the showcase dashboard as seen below.
 
 ![Machine Learning Capture](/source/images/DJMLTKScreenCapture1.png)
+
+Splunk generalizes the model selection process by presenting its default MLTK screen with generalized Splunk style view. Selecting the `Experiments' tab we are presented with a group of nine experiment categories. Since we want to predict the transformed numeric “Outcome” field based on the transformed fields of S001 through S020,  “Predict Numeric Fields” is the best choice.  
+
+
 #### Training
     
-* Show an example of model training -- here 
+After giving your experiment a name, you enter an input SPL mode where you can `Enter a search`. The search resiembles the SPL examples from above.  The last line in the SPL is usally a **table** command outputing fields used as input into a particular machine learning **Algorithm**. An optional Preprocessing Steps window is availiable for standard data preparations activities such as Standard Scaler, Field Selector, PCA among others.
+
+
+At this point,  a Splunk user is presented with four selectable menu fields: 1. `Algorithm`,  a drop-down list of pre-populated choices, 2. `Field to predict`, a drop down list of fields from the SPL **table** command above , 3. `Fields to use for predicting`,  a choice of *one* to *all* the remaining fields from the *table* command, and lastly 4. `Split for training / test: nn/nn`, a slider which splits the dataset up into a training and test set of data.
     
 #### Evaluation
 * Evaluationof a Model -- Here   
