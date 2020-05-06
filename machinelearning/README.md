@@ -198,10 +198,12 @@ Splunk generalizes the model selection process by presenting its default MLTK sc
 
 #### Training
     
-After giving your experiment a name, you enter an input SPL mode where you can `Enter a search`. The search resiembles the SPL examples from above.  The last line in the SPL is usally a **table** command outputing fields used as input into a particular machine learning **Algorithm**. An optional Preprocessing Steps window is availiable for standard data preparations activities such as Standard Scaler, Field Selector, PCA among others.
+After giving your experiment a name, you enter an input SPL mode where you can `Enter a search`. The search resiembles the SPL examples from above.  The last line in the SPL is usally a **| table** command outputing fields used as input into a particular machine learning **Algorithm**. An optional Preprocessing Steps window is availiable for standard data preparations activities such as Standard Scaler, Field Selector, PCA among others.
 
 
-At this point,  a Splunk user is presented with four selectable menu fields: 1. `Algorithm`,  a drop-down list of pre-populated choices, 2. `Field to predict`, a drop down list of fields from the SPL **table** command above , 3. `Fields to use for predicting`,  a choice of *one* to *all* the remaining fields from the *table* command, and lastly 4. `Split for training / test: nn/nn`, a slider which splits the dataset up into a training and test set of data.
+At this point,  a Splunk user is presented with four selectable menu fields: 1. `Algorithm`,  a drop-down list of pre-populated choices, 2. `Field to predict`, a drop down list of fields from the SPL **| table** command above , 3. `Fields to use for predicting`,  a choice of *one* to *all* the remaining fields from the *table* command, and lastly 4. `Split for training / test: nn/nn`, a slider which splits the dataset up into a training and test set of data.
+
+![Experiments Input Dashboard](/source/images/HyperparameterCapture.png)
     
 #### Evaluation
 * Evaluationof a Model -- Here   
@@ -209,7 +211,7 @@ At this point,  a Splunk user is presented with four selectable menu fields: 1. 
 #### Hyperparameter tuning
     
 * Small Example here 
-![Hyperparameter Splunk Image](/source/images/HyperparameterCapture.png)
+
 
 
 #### Prediction
