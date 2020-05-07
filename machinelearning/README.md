@@ -166,7 +166,7 @@ Let us walk through the data cleaning SPL for this task.
 ```
 </font>
 
-Since several different models are available; each with varying capabilities or use case, the dataset must be presented in various ways.  Here are a few data transformation.
+Since several different models are available in the MLTK; each with varying capabilities or use case, the dataset must be presented in various ways.  Here are a few data transformations.
 
 The first is in categorical form:
 ![Splunk Output of transformed to catagorical data](/source/images/TransCategoricalData.png)
@@ -187,7 +187,7 @@ Before we proceed with model selection in Splunk, let us look at a tool from the
 
 From the scikit learn cheat sheet we will use the 50K dataset for this example. 
 
-We traverse the flowchart:  **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **No** `predicting a quantity` **YES** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the flow chart suggests a `SGD Regresser`. 
+We traverse the flowchart:  **START** `>50 samples`  **yes** *sample size is greater than 50.* Next  `predicting a category` **Yes** `do you have labeled data` **YES** `<100K samples` **NO**.  Thus as indicated by the cheat sheet, the flow chart suggests a `SGD Classifier`. (or similar)
 
 "A Stochastic gradient descent (often abbreviated SGD) is an iterative method for optimizing an objective function with suitable smoothness properties (e.g. differentiable or subdifferentiable)."<sup>8</sup>
 
