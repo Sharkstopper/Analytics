@@ -166,9 +166,17 @@ Let us walk through the data cleaning SPL for this task.
 ```
 </font>
 
-The above query produces the following transformed table:
+Since several different models are available; each with varying capabilities or use case, the dataset must be presented in various ways.  Here are a few data transformation.
 
-![Splunk Output of transformed data](/source/images/TransformedData.png)
+The first is in categorical form:
+![Splunk Output of transformed to catagorical data](/source/images/TransCategoricalData.png)
+
+The next is in numerical form:
+![Splunk Output of transformed to numerical data](/source/images/TransformedData.png)
+
+Lastly, the following heatmap shown in a Splunk Dashboard depicts the general composition of the dataset.
+![Cross Tabulation of the dataset](/source/images/DataCrossTab.png)
+
 #### Choosing a model
 
 Model selection is the most important step in the machine learning process and extreme diligence must be applied to ensure that the correct model is chosen.  A few words from Splunk Inc regarding Machine Learning and Deep Learning. Splunk gives the following precautions: “The Machine Learning Toolkit is not a default solution, but a way to create custom machine learning. You must have domain knowledge, Splunk Search Processing Language (SPL) knowledge, Splunk platform experience, and data science skills or experience to use the MLTK.” <sup>7</sup> 
