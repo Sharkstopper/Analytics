@@ -1,2 +1,10 @@
 A = Right shoulder
 B = Left shoulder
+C = Right forearm
+D = Chest
+E = Left forearm
+F = Top of the head
+G = Brim of the cap
+H = Belt buckle
+I = Right thigh
+J = Left thigh
