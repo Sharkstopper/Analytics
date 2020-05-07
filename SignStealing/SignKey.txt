@@ -1,0 +1,2 @@
+A = Right shoulder
+B = Left shoulder
