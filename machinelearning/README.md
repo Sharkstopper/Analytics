@@ -215,7 +215,15 @@ At this point,  a Splunk user is presented with four selectable menu fields: 1. 
 ![Experiments Input Dashboard](/source/images/HyperparameterCapture.png)
     
 #### Evaluation
-* Evaluationof a Model -- Here   
+
+Now that we have trained our model using the machine learning algorithm of our choice, we are now ready to evaluate its effectiveness to determine how well the model performed. One of the most common ways to measure a model’s effectiveness is to use the confusion matrix.  According to Wikipedia, a confusion matrix “….is a specific table layout that allows visualization of the performance of an algorithm, typically a supervised learning one (in unsupervised learning it is usually called a matching matrix). Each row of the matrix represents the instances in a predicted class while each column represents the instances in an actual class (or vice versa).[2] The name stems from the fact that it makes it easy to see if the system is confusing two classes (i.e. commonly mislabeling one as another).” <sup>9</sup>
+
+From the confusion matrix there are over a dozen metrics to home in on how well a classification algorithm is performing. Splunk uses the four most common metrics of Accuracy, Precision, Recall and F1 for evaluating the performance of the algorithm.  The following image shows the formulas for each metric:
+
+![Confusion Metrics](/source/images/ConfusionMetrics.png)
+
+The algorithm produced performance scores as follows:
+ 
     
 #### Hyperparameter tuning
     
@@ -243,3 +251,6 @@ At this point,  a Splunk user is presented with four selectable menu fields: 1. 
  <sup>7</sup>  https://docs.splunk.com/Documentation/MLApp/5.1.0/User/AboutMLTK
  
  <sup>8</sup>  https://en.wikipedia.org/wiki/Stochastic_gradient_descent
+  
+ <sup>9</sup>  https://en.wikipedia.org/wiki/Confusion_matrix
+ 
