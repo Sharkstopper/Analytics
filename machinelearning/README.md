@@ -222,7 +222,7 @@ From the confusion matrix there are over a dozen metrics to home in on how well 
 
 ![Confusion Metrics](/source/images/ConfusionMetrics.png)
 <p align="center">
-  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+  <img width="460" height="300" src="/source/images/ConfusionMetrics.png">
 </p>
 The algorithm produced performance scores as follows:
  
