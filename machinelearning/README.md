@@ -221,7 +221,9 @@ Now that we have trained our model using the machine learning algorithm of our c
 From the confusion matrix there are over a dozen metrics to home in on how well a classification algorithm is performing. Splunk uses the four most common metrics of Accuracy, Precision, Recall and F1 for evaluating the performance of the algorithm.  The following image shows the formulas for each metric:
 
 ![Confusion Metrics](/source/images/ConfusionMetrics.png)
-
+<p align="center">
+  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+</p>
 The algorithm produced performance scores as follows:
  
     
