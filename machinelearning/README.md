@@ -225,7 +225,7 @@ From the confusion matrix there are over a dozen metrics to home in on how well 
 </p>
 The algorithm produced performance scores as follows:
  
-    
+![SVM Metrics Splunk Results](/source/images/SVMconfusionMetrics.png)   
 #### Hyperparameter tuning
     
 * Small Example here 
