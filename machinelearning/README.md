@@ -225,7 +225,7 @@ From the confusion matrix there are over a dozen metrics to home in on how well 
 </p>
 The algorithm produced performance scores as follows:
  
-![SVM Metrics Splunk Results](/source/images/SVMconfusionMetrics.png)   
+[SVM Metrics Splunk Results](/source/images/SVMconfusionMetrics.png)   
 #### Hyperparameter tuning
     
 The goal of hyperparameter tuning is to find the best possible parameters which produce the most effective machine learning algorithm.  The output of each machine learning algorithm is a performance metric. By analyzing performance metrics scores of various ML algorithms, we are now able to select the best algorithm.  To accomplish hyperparameter tuning, we can utilize the power of Python to run a batch of machine learning algorithms without having to run a particular machine learning algorithm one at a time to determine a model effectiveness.  We will demonstrate hyperparameter tuning using the following jupyter notebook code: 
