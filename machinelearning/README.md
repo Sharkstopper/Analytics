@@ -12,9 +12,9 @@ First and foremost, machine learning is a subset of artificial intelligence.  Ad
 ### Terminology and Definitions
 
 Let's start with a definition of these three terms.
-Wikipedia defines artificial intelligence as follows: “In computer science, artificial intelligence (AI), sometimes called machine intelligence, is intelligence demonstrated by machines, in contrast to the natural intelligence displayed by humans and animals.”<sup>1</sup> Although this term came into existence in the 1960s it is still in wide used today. 
+Wikipedia defines artificial intelligence as follows: “In computer science, artificial intelligence (AI), sometimes called machine intelligence, is intelligence demonstrated by machines, in contrast to the natural intelligence displayed by humans and animals.”<sup>1</sup> Although this term came into existence in the 1960s, it is still in wide used today. 
 
-Machine Learning is about 20 years old and is where the bulk of the research and development activities have taking place. Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to carry out tasks without explicit instructions, such as by using pattern recognition and inference.<sup>2</sup>   An explosion of machine learning algorithms was invented and implemented in the early 2000’s making this technology mainstream.  Specifically, most of the past success with AI has taken place in this space. 
+Machine Learning is about 20 years old and is where the bulk of the research and development activities have taken place. Machine learning (ML) is the scientific study of algorithms and statistical models that computer systems use to carry out tasks without explicit instructions such as by using pattern recognition and inference.<sup>2</sup>   An explosion of machine learning algorithms entered the scene in the early 2000’s thus subsequently making this technology mainstream.  Specifically, most of the past success with AI has taken place in this space. 
 
 Deep Learning is best defined by Jon Krohn in his video course "Deep Learning with TensorFlow".  He states, *“Deep learning involves stacking these straightforward little algorithms called artificial neurons together to solve problems.”*  A neuron as its name implies mimics the human brain physiology. This lines up with Wikipedia definition, "Deep learning is a class of machine learning algorithms that uses multiple layers to progressively extract higher level features from the raw input. For example, in image processing, lower layers may identify edges, while higher layers may identify the concepts relevant to a human such as digits or letters or faces."<sup>3</sup> The topic of deep learning is beyond the scope of this document therefore we will transition to the document's primary focus;  Machine Learning. 
 
@@ -27,7 +27,7 @@ On a higher level, Yufeng G states that Machine Learning has seven steps<sup>4</
 6. Hyperparameter tuning
 7. Prediction
 
-
+Later in the paper, we will apply Yefeng defined steps to a SPLUNK example as a way of introducing the topic of ML.
 
 ### Machine Learning Process
 
@@ -54,11 +54,9 @@ Here is a table of commonly used machine learning algorithms with the equivalent
 
 Most of these algorithms are available in Splunk’s MLTK.
 
-### A Splunk Example
+### A Splunk Example of Machine Learning
 
-We will spend much of our time addressing and discussing a simple machine learning model implemented in Splunk of open source publicly available data.  These examples are available on the Splunk GitHub site.
-
-In order to understand machine learning, we must first understand the fundamental process of machine learning.   The process is train; fit; apply steps that all machine learning model uses.
+In order to understand machine learning, we must first understand the fundamental process of machine learning.   The process is train; fit; apply.  These three steps are applied to all machine learning models and you will see them applied to the examples that follows.
 
 First you must train your model on some portion of the dataset which is randomly sampled from about 70% of your original data. This subset of data is called your training data.   Splunk MLTK will give you an option to vary your training data to your specification.  Seventy percent is the recommended size of your training data.  The remainder of your data is called your test data set. The test dataset is used to validate the model after it trains on the training data.
 
