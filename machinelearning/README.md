@@ -173,7 +173,7 @@ The next is in numerical form:
 ![Splunk Output of transformed to numerical data](/source/images/TransformedData.png)
 
 Lastly, the following heatmap shown in a Splunk Dashboard depicts the general composition of the dataset.
-![Cross Tabulation of the dataset](/source/images/DataCrosTab.png)
+![Cross Tabulation of the dataset](/source/images/DataCrossTab.png)
 
 #### Choosing a model
 
