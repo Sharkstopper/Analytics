@@ -232,12 +232,16 @@ The goal of hyperparameter tuning is to find the best possible parameters which 
 
 ![Hyperparameter jupyter notebook](/source/StealBBmodelEvalHyperTuning.md)
 
-
-
-
 #### Prediction
-   Deep Learning Dashboard here 
-![Machine Learning Capture1](/source/images/BaseBallNNCapture1.png)  
+According to Datarobot.com, “Prediction refers to the output of an algorithm after it has been trained on a historical dataset and applied to new data when forecasting the likelihood of a particular outcome, such as whether or not a customer will churn in 30 days.” <sup>10</sup>
+In our case, how well our trained model performed on the test data depended on how the data was preprocessed.  To improve performance, several data transformation methods were applied to the dataset such as padding the blank fields at the end of a message “Z”s or assigning a random number between 1 and 10 to the end of the message sequence.  Result.  Splunk MLTK algorithms were able to achieve between 0.65 thru 0.74 on precision, recall, accuracy and F1 scores.
+
+
+### Conclusion
+The focus of this paper was to cover the steps of the machine learning process. Although the model performance metrics on our test set did not produce strong classification scores, the general process of machine learning was discussed in a step by step manner.   To improve the performance of the models, an actual real life balanced dataset is needed to validate the various models. 
+ The web site Elite Data Science states that, “Imbalanced classes put “accuracy” out of business. This is a surprisingly common problem in machine learning (specifically in classification), occurring in datasets with a disproportionate ratio of observations in each class.
+Standard accuracy no longer reliably measures performance, which makes model training much trickier.”  https://elitedatascience.com/imbalanced-classes
+
 ######  Footnotes
    
  <sup>1</sup> https://en.wikipedia.org/wiki/Artificial_intelligence
@@ -257,4 +261,6 @@ The goal of hyperparameter tuning is to find the best possible parameters which 
  <sup>8</sup>  https://en.wikipedia.org/wiki/Stochastic_gradient_descent
   
  <sup>9</sup>  https://en.wikipedia.org/wiki/Confusion_matrix
+ 
+ <sup>10</sup> https://www.datarobot.com/wiki/prediction/
  
