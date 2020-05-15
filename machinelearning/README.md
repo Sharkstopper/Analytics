@@ -223,7 +223,7 @@ From the confusion matrix there are over a dozen metrics to home in on how well 
 </p>
 The algorithm produced performance scores as follows:
  
-[SVM Metrics Splunk Results](/source/images/SVMconfusionMetrics.png)   
+![SVM Metrics Splunk Results](/source/images/SVMconfusionMetrics.png)   
 #### Hyperparameter tuning
     
 The goal of hyperparameter tuning is to find the best possible parameters which produce the most effective machine learning algorithm.  The output of each machine learning algorithm is a performance metric. By analyzing performance metrics scores of various ML algorithms, we are now able to select the best algorithm.  To accomplish hyperparameter tuning, we can utilize the power of Python to run a batch of machine learning algorithms without having to run a particular machine learning algorithm one at a time to determine a model effectiveness.  We will demonstrate hyperparameter tuning using the following jupyter notebook code: 
@@ -234,7 +234,7 @@ The goal of hyperparameter tuning is to find the best possible parameters which 
 According to Datarobot.com, “Prediction refers to the output of an algorithm after it has been trained on a historical dataset and applied to new data when forecasting the likelihood of a particular outcome, such as whether or not a customer will churn in 30 days.” <sup>10</sup>
 
 According to Datarobot.com, “Prediction refers to the output of an algorithm after it has been trained on a historical dataset and applied to new data when forecasting the likelihood of a particular outcome, such as whether or not a customer will churn in 30 days.” 10 In our case, how well our trained model performed on the test data depended on how the data was preprocessed. To improve performance, several data transformation methods were applied to the dataset such as padding the blank fields at the end of a message “Z”s or assigning a random number between 1 and 10 to the end of the message sequence. Result. Splunk MLTK algorithms were able to achieve between 0.65 thru 0.76 on precision, recall, accuracy and F1 scores. The algorithm that performed best was the MLPClassifier (Multi-layer Perceptron classifier). This algorithm achieved the following performance score
-[Multi-layer Perceptron classifier](/source/images/MLPClassiferScore.png)   
+![Multi-layer Perceptron classifier](/source/images/MLPClassiferScore.png)   
 
 ### Conclusion
 The focus of this paper was to cover the steps of the machine learning process. Although the model performance metrics on our test set did not produce strong classification scores, the general process of machine learning was discussed in a step by step manner.   To improve the performance of the models, an actual real life balanced dataset is needed to validate the various models. 
