@@ -1,0 +1,73 @@
+function Get-HeartBeat3 {
+    <#
+
+    .SYNOPSIS
+        Collects heartbeat data of computer and exports to .CSV file
+
+    .DESCRIPTION
+        Collects the following heartbeat data of computer using Get-CimInstance:
+         - Hotfix: ID and Installation Date
+         - BIOS: Version, Release Date and Status
+         - OS: Name, Type, Version, Last Boot Up Time
+         - Windows: Version
+
+    .OUTPUTS
+        Get-Heartbeat | Out-File C:\Users\log.csv
+
+    .EXAMPLE
+        Get-Heartbeat3 
+
+    .NOTES
+       Version 1.0 of Get-Heartbeat
+
+    #>
+
+    Param ($ComputerObject)
+    #Get Start-Script Time
+    $StartTime = (Get-Date)
+    #Get Hotfix Info
+    $Hotfix = Get-CimInstance -ClassName Win32_QuickFixEngineering | Select-Object -Property Description, HotFixID, InstalledOn
+    $CombineHotFixData = $HotFix |
+            ForEach-Object {$_.Description + ',' + $_.HotFixID + ',' + $_.InstalledOn}
+    $HotFixResult = $CombineHotFixData -join ';'
+    #Get Bios Info (Version, Release Date and Status)
+    $BiosInfo = Get-CimInstance -ClassName Win32_BIOS
+    $BiosVersion = $BiosInfo.Version
+    $BiosStatus = $BiosInfo.Status
+    $BiosReleaseDate = $BiosInfo.ReleaseDate
+    #Get OS Info (Name, Type, Version, Last boot up time)
+    $OSInfo = Get-CimInstance -ClassName Win32_OperatingSystem 
+    $LastBootUpTime = $OSInfo.LastBootUpTime
+    $WindowsProductName = $OSInfo.caption
+    $OSType = $OSInfo.OSType
+    $OSVersion = $OSInfo.Version
+    #Get Windows Info (Version)
+    $WindowsInfo = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+    $WindowsReleaseId = $WindowsInfo.ReleaseId
+    #Test connections to different servers required for logon 
+    $NetConnection = Test-NetConnection www.google.com -TraceRoute
+    $GoogleTraceRoute = $NetConnection |
+            ForEach-Object {$_.TraceRoute}
+    $NetResult = $GoogleTraceRoute -join ','
+
+    #Create object to make .csv compatible
+   
+    $Computerobject = new-object psobject -Property @{
+    "Today's Date" = $StartTime
+    'Bios Version' = $BiosVersion
+    'Bios Status' = $BiosStatus
+    'Bios Release Date' = $BiosReleaseDate
+    'Last Reboot' = $LastBootUpTime
+    'Windows Product Name' = $WindowsProductName
+    'OS Type' = $OSType
+    'OS Version' = $OSVersion
+    'Windows Info' = $WindowsReleaseId
+    'Hotfix Data' = $HotFixResult
+    'Google Trace Route' = $NetResult
+    }
+     
+  #Output data in order to .CSV file
+
+  $ComputerObject | Select-Object "Today's Date", 'Bios Version', 'Bios Status','Bios Release Date','Windows Product Name', 'Windows Info', 'OS Type', 'OS Version', 'Hotfix Data', 'Google Trace Route', 'Last Reboot' | Export-CSV '.\My Documents\ComputerInfo.csv' -notype -Append
+  
+}
