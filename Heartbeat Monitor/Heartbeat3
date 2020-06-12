@@ -10,15 +10,18 @@ function Get-HeartBeat3 {
          - BIOS: Version, Release Date and Status
          - OS: Name, Type, Version, Last Boot Up Time
          - Windows: Version
+         - Trace Route
+         - Network: IP, Prefix Length, MAC, Source Address, Remote Address, Logon Server, User Login
+         - System: CPU, RAM, HDD
 
     .OUTPUTS
-        Get-Heartbeat | Out-File C:\Users\log.csv
+        Get-Heartbeat3
 
     .EXAMPLE
         Get-Heartbeat3 
 
     .NOTES
-       Version 1.0 of Get-Heartbeat
+       Version 3.0 of Get-Heartbeat
 
     #>
 
@@ -49,6 +52,21 @@ function Get-HeartBeat3 {
     $GoogleTraceRoute = $NetConnection |
             ForEach-Object {$_.TraceRoute}
     $NetResult = $GoogleTraceRoute -join ','
+    #Get IPAddress and Prefix Length
+    $IPInfo = Get-NetIPAddress -InterfaceAlias "Eth*" -AddressFamily IPv4
+    #Get MACAddress
+    $MACaddress = (Get-CimInstance Win32_NetworkAdapterConfiguration|Where {$_.MACaddress.length -gt 1}).MACAddress | Select-object -index 0
+    #Get Domain Controller
+    $LogonServer = Get-CimInstance Win32_NTDomain
+    
+    #MAYBE DATA
+    #Get HDD Info
+    $HDDInfo = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID = 'C:'"
+    #Get RAM, Name, Domain, User LogOn Info
+    $SystemInfo = Get-CimInstance CIM_ComputerSystem
+    #Get CPU
+    $CPUInfo = Get-CimInstance CIM_Processor
+
 
     #Create object to make .csv compatible
    
@@ -64,10 +82,26 @@ function Get-HeartBeat3 {
     'Windows Info' = $WindowsReleaseId
     'Hotfix Data' = $HotFixResult
     'Google Trace Route' = $NetResult
+    'Name' = $SystemInfo.Name
+    'Domain' = $SystemInfo.Domain
+    'Logon Server' = $LogonServer.DomainControllerName
+    'User logged In' = $SystemInfo.UserName
+    'Source Address' = $NetConnection.SourceAddress.IPAddress
+    'Remote Address' = $NetConnection.RemoteAddress.IPAddressToString
+    'Ping Succeeded' = $NetConnection.PingSucceeded
+    'Ping Reply Details (RTT)' = $NetConnection.PingReplyDetails.RoundtripTime
+    'IP Address' = $IPInfo.IPAddress
+    'Prefix Length' = $IPInfo.PrefixLength
+    'MAC Address' = $MACaddress
+
+    'HDD Capacity' = "{0:N2}" -f ($HDDInfo.Size/1GB) + "GB"
+    'HDD Space' = "{0:P2}" -f ($HDDInfo.FreeSpace/$computerHDD.Size) + " Free (" + "{0:N2}" -f ($computerHDD.FreeSpace/1GB) + "GB)"
+    'RAM' = "{0:N2}" -f ($SystemInfo.TotalPhysicalMemory/1GB) + "GB"
+    'CPU' = $CPUInfo.Name
     }
      
   #Output data in order to .CSV file
 
-  $ComputerObject | Select-Object "Today's Date", 'Bios Version', 'Bios Status','Bios Release Date','Windows Product Name', 'Windows Info', 'OS Type', 'OS Version', 'Hotfix Data', 'Google Trace Route', 'Last Reboot' | Export-CSV '.\My Documents\ComputerInfo.csv' -notype -Append
+  $ComputerObject | Export-Csv '.\My Documents\ComputerInfo.csv' -notype -Append
   
 }
