@@ -1,0 +1,107 @@
+function Get-HeartBeat3 {
+    <#
+
+    .SYNOPSIS
+        Collects heartbeat data of computer and exports to .CSV file
+
+    .DESCRIPTION
+        Collects the following heartbeat data of computer using Get-CimInstance:
+         - Hotfix: ID and Installation Date
+         - BIOS: Version, Release Date and Status
+         - OS: Name, Type, Version, Last Boot Up Time
+         - Windows: Version
+         - Trace Route
+         - Network: IP, Prefix Length, MAC, Source Address, Remote Address, Logon Server, User Login
+         - System: CPU, RAM, HDD
+
+    .OUTPUTS
+        Get-Heartbeat3
+
+    .EXAMPLE
+        Get-Heartbeat3 
+
+    .NOTES
+       Version 3.0 of Get-Heartbeat
+
+    #>
+
+    Param ($ComputerObject)
+    #Get Start-Script Time
+    $StartTime = (Get-Date)
+    #Get Hotfix Info
+    $Hotfix = Get-CimInstance -ClassName Win32_QuickFixEngineering | Select-Object -Property Description, HotFixID, InstalledOn
+    $CombineHotFixData = $HotFix |
+            ForEach-Object {$_.Description + ',' + $_.HotFixID + ',' + $_.InstalledOn}
+    $HotFixResult = $CombineHotFixData -join ';'
+    #Get Bios Info (Version, Release Date and Status)
+    $BiosInfo = Get-CimInstance -ClassName Win32_BIOS
+    $BiosVersion = $BiosInfo.Version
+    $BiosStatus = $BiosInfo.Status
+    $BiosReleaseDate = $BiosInfo.ReleaseDate
+    #Get OS Info (Name, Type, Version, Last boot up time)
+    $OSInfo = Get-CimInstance -ClassName Win32_OperatingSystem 
+    $LastBootUpTime = $OSInfo.LastBootUpTime
+    $WindowsProductName = $OSInfo.caption
+    $OSType = $OSInfo.OSType
+    $OSVersion = $OSInfo.Version
+    #Get Windows Info (Version)
+    $WindowsInfo = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
+    $WindowsReleaseId = $WindowsInfo.ReleaseId
+    #Test connections to different servers required for logon 
+    $NetConnection = Test-NetConnection www.google.com -TraceRoute
+    $GoogleTraceRoute = $NetConnection |
+            ForEach-Object {$_.TraceRoute}
+    $NetResult = $GoogleTraceRoute -join ','
+    #Get IPAddress and Prefix Length
+    $IPInfo = Get-NetIPAddress -InterfaceAlias "Eth*" -AddressFamily IPv4
+    #Get MACAddress
+    $MACaddress = (Get-CimInstance Win32_NetworkAdapterConfiguration|Where {$_.MACaddress.length -gt 1}).MACAddress | Select-object -index 0
+    #Get Domain Controller
+    $LogonServer = Get-CimInstance Win32_NTDomain
+    
+    #MAYBE DATA
+    #Get HDD Info
+    $HDDInfo = Get-CimInstance Win32_LogicalDisk -Filter "DeviceID = 'C:'"
+    #Get RAM, Name, Domain, User LogOn Info
+    $SystemInfo = Get-CimInstance CIM_ComputerSystem
+    #Get CPU
+    $CPUInfo = Get-CimInstance CIM_Processor
+
+
+    #Create object to make .csv compatible
+   
+    $Computerobject = new-object psobject -Property @{
+    "Today's Date" = $StartTime
+    'Bios Version' = $BiosVersion
+    'Bios Status' = $BiosStatus
+    'Bios Release Date' = $BiosReleaseDate
+    'Last Reboot' = $LastBootUpTime
+    'Windows Product Name' = $WindowsProductName
+    'OS Type' = $OSType
+    'OS Version' = $OSVersion
+    'Windows Info' = $WindowsReleaseId
+    'Hotfix Data' = $HotFixResult
+    'Google Trace Route' = $NetResult
+    'Name' = $SystemInfo.Name
+    'Domain' = $SystemInfo.Domain
+    'Logon Server' = $LogonServer.DomainControllerName
+    'User logged In' = $SystemInfo.UserName
+    'Source Address' = $NetConnection.SourceAddress.IPAddress
+    'Remote Address' = $NetConnection.RemoteAddress.IPAddressToString
+    'Ping Succeeded' = $NetConnection.PingSucceeded
+    'Ping Reply Details (RTT)' = $NetConnection.PingReplyDetails.RoundtripTime
+    'IP Address' = $IPInfo.IPAddress
+    'Prefix Length' = $IPInfo.PrefixLength
+    'MAC Address' = $MACaddress
+
+    'HDD Capacity' = "{0:N2}" -f ($HDDInfo.Size/1GB) + "GB"
+    'HDD Space' = "{0:P2}" -f ($HDDInfo.FreeSpace/$computerHDD.Size) + " Free (" + "{0:N2}" -f ($computerHDD.FreeSpace/1GB) + "GB)"
+    'RAM' = "{0:N2}" -f ($SystemInfo.TotalPhysicalMemory/1GB) + "GB"
+    'CPU' = $CPUInfo.Name
+    }
+     
+  #Output data in order to .CSV file
+
+  $ComputerObject | Export-Csv '.\My Documents\ComputerInfo.csv' -notype -Append
+  
+}
